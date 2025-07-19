@@ -1,19 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Learning Style Analysis</title>
-  <link rel="stylesheet" href="style2.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Learning-Style Analysis – Team Fisher</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+  <script src="script-analysis.js" defer></script>
 </head>
-<body style="text-align:center; background-color:#002147; color:white;">
-  <img src="logo.png" alt="Team Fisher Logo" style="max-width:150px; margin-top:20px;">
-  <h1>Learning Style Analysis</h1>
-  <p><strong>Activist:</strong> Learns by doing and enjoys new experiences.</p>
-  <p><strong>Reflector:</strong> Learns by observing and thinking before acting.</p>
-  <p><strong>Theorist:</strong> Learns by understanding theories and models.</p>
-  <p><strong>Pragmatist:</strong> Learns by applying ideas in practical situations.</p>
-  <p>Source: <a href="https://www.bitesizelearning.co.uk/resources/honey-mumford-learning-styles" style="color:white;">Bitesize Learning</a></p>
-  <br>
-  <a href="index.html" style="color:white; text-decoration:underline;">Back to Questionnaire</a>
+<body>
+  <div class="container">
+    <img src="logo.jpg" alt="Team Fisher logo" class="logo">
+    <h1>Honey &amp; Mumford Analysis</h1>
+    <canvas id="radarChart" width="400" height="400"></canvas>
+    <div id="summary" class="card"></div>
+    <div id="pros-cons" class="card"></div>
+  </div>
 </body>
 </html>

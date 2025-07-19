@@ -1,32 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Honey & Mumford Questionnaire</title>
-  <link rel="stylesheet" href="style2.css">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="script2.js" defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Honey &amp; Mumford Questionnaire – Team Fisher</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+  <script src="script-quiz.js" defer></script>
 </head>
-<body style="text-align:center; background-color:#002147; color:white;">
-  <img src="logo.png" alt="Team Fisher Logo" style="max-width:150px; margin-top:20px;">
-  <h1>Honey & Mumford Learning Styles Questionnaire</h1>
-  <div id="question-container">
-    <div id="question-text"></div>
-    <div class="buttons">
-      <button onclick="submitAnswer(true)">Agree</button>
-      <button onclick="submitAnswer(false)">Disagree</button>
+<body>
+  <div class="container">
+    <img src="logo.jpg" alt="Team Fisher logo" class="logo">
+    <h1>Honey &amp; Mumford Learning Styles Questionnaire</h1>
+    <div id="question-container" class="card">
+      <p id="question-text"></p>
+      <div class="buttons">
+        <button id="agree-btn">Yes</button>
+        <button id="disagree-btn">No</button>
+      </div>
+      <p id="progress"></p>
     </div>
-  </div>
-  <div id="result-container" style="display:none;">
-    <h2>Your Learning Style Results</h2>
-    <pre id="result-text"></pre>
-    <canvas id="radarChart" width="400" height="400"></canvas>
-    <br>
-    <button onclick="window.print()">Print Results</button>
-    <button onclick="emailResults()">Email Results</button>
-    <br><br>
-    <a href="analysis.html" style="color:white; text-decoration:underline;">View Learning Style Analysis</a>
+    <div id="result-container" class="card hidden">
+      <h2>Your learning-style snapshot</h2>
+      <canvas id="radarChart" width="400" height="400"></canvas>
+      <a id="analysis-link" class="primary-btn" href="#">Detailed analysis ↗</a>
+    </div>
   </div>
 </body>
 </html>

@@ -1,0 +1,20 @@
+{
+  "name": "Team Fisher Honey & Mumford",
+  "short_name": "H&M Styles",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#002147",
+  "theme_color": "#002147",
+  "icons": [
+    {
+      "src": "logo.jpg",
+      "type": "image/jpeg",
+      "sizes": "192x192"
+    },
+    {
+      "src": "logo.jpg",
+      "type": "image/jpeg",
+      "sizes": "512x512"
+    }
+  ]
+}

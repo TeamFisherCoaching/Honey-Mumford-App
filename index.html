@@ -1,32 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Honey & Mumford Questionnaire</title>
-  <link rel="stylesheet" href="style2.css">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="script2.js" defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#002147">
+  <title>Discover Your Learning Style – Team Fisher</title>
+
+  <!-- PWA manifest -->
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Libraries -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js" defer></script>
+
+  <!-- App scripts -->
+  <script src="script-quiz.js" defer></script>
 </head>
-<body style="text-align:center; background-color:#002147; color:white;">
-  <img src="logo.png" alt="Team Fisher Logo" style="max-width:150px; margin-top:20px;">
-  <h1>Honey & Mumford Learning Styles Questionnaire</h1>
-  <div id="question-container">
-    <div id="question-text"></div>
-    <div class="buttons">
-      <button onclick="submitAnswer(true)">Agree</button>
-      <button onclick="submitAnswer(false)">Disagree</button>
-    </div>
-  </div>
-  <div id="result-container" style="display:none;">
-    <h2>Your Learning Style Results</h2>
-    <pre id="result-text"></pre>
-    <canvas id="radarChart" width="400" height="400"></canvas>
-    <br>
-    <button onclick="window.print()">Print Results</button>
-    <button onclick="emailResults()">Email Results</button>
-    <br><br>
-    <a href="analysis.html" style="color:white; text-decoration:underline;">View Learning Style Analysis</a>
-  </div>
+<body>
+  <header>
+    <img src="logo.jpg" alt="Team Fisher logo" class="logo">
+    <h1 class="sr-only">Honey &amp; Mumford Learning Styles Questionnaire</h1>
+  </header>
+
+  <main class="container">
+    <!-- HERO / INTRO -->
+    <section id="hero" class="card hero" aria-labelledby="hero-heading">
+      <h2 id="hero-heading">Discover Your Honey &amp; Mumford Learning Style</h2>
+
+      <p>The Honey &amp; Mumford model identifies four distinct learning preferences — <strong>Activist, Reflector, Theorist</strong> and <strong>Pragmatist</strong>. Understanding your mix helps you learn faster, coach more effectively and tailor development journeys that actually stick.</p>
+
+      <h3>At‑a‑glance overview of the styles</h3>
+      <table class="style-table">
+        <thead>
+          <tr>
+            <th scope="col">Activist</th><th scope="col">Reflector</th><th scope="col">Theorist</th><th scope="col">Pragmatist</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><ul><li>Jump in feet‑first.</li><li>Love novelty &amp; variety.</li><li>Prefer group activities.</li></ul></td>
+            <td><ul><li>Observe before acting.</li><li>Collect &amp; analyse data.</li><li>Enjoy reflective journals.</li></ul></td>
+            <td><ul><li>Seek rational models.</li><li>Value logic &amp; structure.</li><li>Ask “why does it work?”</li></ul></td>
+            <td><ul><li>Focus on application.</li><li>Experiment with ideas.</li><li>Value quick results.</li></ul></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Why it matters in coaching</h3>
+      <ul>
+        <li><strong>Self‑reflection for coachees:</strong> Spot blind‑spots and play to strengths when tackling new challenges.</li>
+        <li><strong>Coaching agility:</strong> Adapt questions, feedback and practice tasks to each individual’s dominant style.</li>
+        <li><strong>Balanced development:</strong> Surface the less‑used quadrants so learners grow in all modes.</li>
+      </ul>
+
+      <button id="start-btn" class="primary-btn">Start the Questionnaire</button>
+      <p class="note">80 statements · ~7 minutes · mobile‑friendly</p>
+    </section>
+
+    <!-- QUESTION STEP -->
+    <section id="question-container" class="card hidden" aria-live="polite">
+      <p id="question-text"></p>
+      <div class="buttons" role="group" aria-label="Answer buttons">
+        <button id="agree-btn">Yes</button>
+        <button id="disagree-btn">No</button>
+      </div>
+      <p id="progress" class="progress"></p>
+      <p class="swipe-hint" aria-hidden="true">Swipe right for Yes, left for No</p>
+    </section>
+
+    <!-- RESULT STEP -->
+    <section id="result-container" class="card hidden" aria-labelledby="snapshot-heading">
+      <h2 id="snapshot-heading">Your learning‑style snapshot</h2>
+      <canvas id="radarChart" width="400" height="400" aria-label="Radar chart of your scores"></canvas>
+      <div id="score-values" class="score-values" aria-live="polite"></div>
+
+      <div class="btn-row">
+        <a id="email-link-mini" class="primary-btn" href="#">Email my results 📧</a>
+        <button id="pdf-btn-mini" class="primary-btn">Download PDF 📄</button>
+        <a id="analysis-link" class="primary-btn" href="#">Detailed analysis ↗</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Team Fisher Coaching</p>
+  </footer>
+
+  <script>
+    // Register service worker for PWA
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js');
+    }
+  </script>
 </body>
 </html>

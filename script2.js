@@ -1,1 +1,1 @@
-// script2.js placeholder for Honey & Mumford logic
+// Placeholder for script2.js logic

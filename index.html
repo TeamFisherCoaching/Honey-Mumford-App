@@ -1,32 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Honey & Mumford Questionnaire</title>
-  <link rel="stylesheet" href="style2.css">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="script2.js" defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Discover Your Learning Style – Team Fisher</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+  <script src="script-quiz.js" defer></script>
 </head>
-<body style="text-align:center; background-color:#002147; color:white;">
-  <img src="logo.png" alt="Team Fisher Logo" style="max-width:150px; margin-top:20px;">
-  <h1>Honey & Mumford Learning Styles Questionnaire</h1>
-  <div id="question-container">
-    <div id="question-text"></div>
-    <div class="buttons">
-      <button onclick="submitAnswer(true)">Agree</button>
-      <button onclick="submitAnswer(false)">Disagree</button>
+<body>
+  <div class="container">
+    <img src="logo.jpg" alt="Team Fisher logo" class="logo">
+
+    <!-- HERO / INTRO -->
+    <section id="hero" class="card hero">
+      <h1>Discover Your Honey &amp; Mumford Learning Style</h1>
+      <p>The Honey &amp; Mumford model identifies four distinct learning preferences — <strong>Activist, Reflector, Theorist</strong> and <strong>Pragmatist</strong>. Understanding where you sit on this spectrum helps you learn faster, coach more effectively and tailor development journeys that actually stick.</p>
+
+      <h2>At‑a‑glance overview</h2>
+      <table class="style-table">
+        <tr>
+          <th>Activist</th><th>Reflector</th><th>Theorist</th><th>Pragmatist</th>
+        </tr>
+        <tr>
+          <td><ul><li>Jump in feet‑first.</li><li>Love novelty &amp; variety.</li><li>Prefer group activities.</li></ul></td>
+          <td><ul><li>Observe before acting.</li><li>Collect &amp; analyse data.</li><li>Enjoy reflective journals.</li></ul></td>
+          <td><ul><li>Seek rational models.</li><li>Value logic &amp; structure.</li><li>Ask “why does it work?”</li></ul></td>
+          <td><ul><li>Focus on application.</li><li>Experiment with ideas.</li><li>Value quick results.</li></ul></td>
+        </tr>
+      </table>
+
+      <h2>Why it matters in coaching</h2>
+      <ul>
+        <li><strong>Self‑reflection for coachees:</strong> spot blind‑spots and play to strengths when tackling new challenges.</li>
+        <li><strong>Coaching agility:</strong> adapt your questions, feedback and practice tasks to each individual’s dominant style.</li>
+        <li><strong>Balanced development:</strong> surface the ‘less‑used’ quadrants so learners grow in all modes.</li>
+      </ul>
+
+      <button id="start-btn" class="primary-btn">Start the Questionnaire</button>
+    </section>
+
+    <!-- QUESTION STEP -->
+    <div id="question-container" class="card hidden">
+      <p id="question-text"></p>
+      <div class="buttons">
+        <button id="agree-btn">Yes</button>
+        <button id="disagree-btn">No</button>
+      </div>
+      <p id="progress"></p>
     </div>
-  </div>
-  <div id="result-container" style="display:none;">
-    <h2>Your Learning Style Results</h2>
-    <pre id="result-text"></pre>
-    <canvas id="radarChart" width="400" height="400"></canvas>
-    <br>
-    <button onclick="window.print()">Print Results</button>
-    <button onclick="emailResults()">Email Results</button>
-    <br><br>
-    <a href="analysis.html" style="color:white; text-decoration:underline;">View Learning Style Analysis</a>
+
+    <!-- RESULT STEP -->
+    <div id="result-container" class="card hidden">
+      <h2>Your learning‑style snapshot</h2>
+      <canvas id="radarChart" width="400" height="400"></canvas>
+      <div id="score-values" class="score-values"></div>
+
+      <!-- email link -->
+      <a id="email-link-mini" class="primary-btn" href="#">Email my results 📧</a><br>
+      <a id="analysis-link" class="primary-btn" href="#">View detailed analysis ↗</a>
+    </div>
   </div>
 </body>
 </html>

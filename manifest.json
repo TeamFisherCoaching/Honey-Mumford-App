@@ -1,0 +1,8 @@
+{
+  "name": "Honey & Mumford Styles",
+  "short_name": "H&M",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#002147",
+  "theme_color": "#002147"
+}

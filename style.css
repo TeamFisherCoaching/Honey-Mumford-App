@@ -1,0 +1,26 @@
+:root{
+ --navy:#002147;
+ --cyan:#00cfff;
+ --card:#03142e;
+ --white:#ffffff;
+}
+*{box-sizing:border-box;}
+body{margin:0;font-family:system-ui,Arial,sans-serif;background:var(--navy);color:var(--white);}
+.container{max-width:860px;margin:0 auto;padding:0 .75rem;text-align:center;}
+.logo{max-width:120px;margin:1rem auto;}
+.card{background:var(--card);padding:1.25rem;border-radius:10px;margin-top:1rem;text-align:left;}
+.primary-btn{background:var(--cyan);color:var(--navy);border:none;border-radius:6px;padding:.75rem 1.25rem;text-decoration:none;cursor:pointer;}
+.big{font-size:1.15rem;padding:1rem 1.5rem;}
+.hidden{display:none;}
+.howto{padding-left:1.25rem;margin:.5rem 0;}
+.howto li{margin-bottom:.35rem;}
+.yes{color:#5f5;}
+.no{color:#f88;}
+/* Fixed button row */
+.buttons.fixed{position:sticky;bottom:0;background:var(--card);padding:1rem 0;display:flex;gap:.75rem;justify-content:center;}
+.buttons.fixed button{min-width:115px;}
+/* wrap fix for all button rows */
+.buttons,.btn-row{display:flex;flex-wrap:wrap;gap:.75rem;justify-content:center;}
+.score-line{font-weight:bold;text-align:center;margin-top:1rem;}
+.progress{font-size:.9rem;color:#aaa;text-align:center;}
+.swipe-hint{font-size:.9rem;text-align:center;margin-top:.5rem;color:#bbb;}

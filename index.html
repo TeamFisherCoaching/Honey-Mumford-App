@@ -1,32 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Honey & Mumford Questionnaire</title>
-  <link rel="stylesheet" href="style2.css">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="script2.js" defer></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Honey &amp; Mumford Questionnaire – Team Fisher</title>
+<meta name="theme-color" content="#002147">
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1" defer></script>
+<script src="script-quiz.js" defer></script>
 </head>
-<body style="text-align:center; background-color:#002147; color:white;">
-  <img src="logo.png" alt="Team Fisher Logo" style="max-width:150px; margin-top:20px;">
-  <h1>Honey & Mumford Learning Styles Questionnaire</h1>
-  <div id="question-container">
-    <div id="question-text"></div>
-    <div class="buttons">
-      <button onclick="submitAnswer(true)">Agree</button>
-      <button onclick="submitAnswer(false)">Disagree</button>
-    </div>
+<body>
+<header><img src="logo.jpg" alt="Team Fisher logo" class="logo"></header>
+<main class="container">
+<section id="hero" class="card hero">
+  <h2>Discover Your Honey &amp; Mumford Learning Style</h2>
+  <p class="lead">Answer instinctively – it takes about <strong>7&nbsp;minutes</strong>.</p>
+  <ol class="howto">
+    <li>Swipe <span class="yes">right</span> or tap <b>Yes</b> if the statement feels true.</li>
+    <li>Swipe <span class="no">left</span> or tap <b>No</b> if not.</li>
+    <li>Go with your <b>first gut reaction</b>.</li>
+  </ol>
+  <button id="start-btn" class="primary-btn big">Start Questionnaire</button>
+</section>
+
+<section id="q-card" class="card hidden" aria-live="polite">
+  <p id="q-text"></p>
+  <div class="buttons fixed">
+    <button id="yes-btn">Yes</button>
+    <button id="no-btn">No</button>
   </div>
-  <div id="result-container" style="display:none;">
-    <h2>Your Learning Style Results</h2>
-    <pre id="result-text"></pre>
-    <canvas id="radarChart" width="400" height="400"></canvas>
-    <br>
-    <button onclick="window.print()">Print Results</button>
-    <button onclick="emailResults()">Email Results</button>
-    <br><br>
-    <a href="analysis.html" style="color:white; text-decoration:underline;">View Learning Style Analysis</a>
+  <p id="progress" class="progress"></p>
+  <p id="swipe-hint" class="swipe-hint hidden">⬅ Swipe <strong>No</strong> | Swipe <strong>Yes</strong> ➡</p>
+</section>
+
+<section id="snapshot" class="card hidden">
+  <h2>Your learning‑style snapshot</h2>
+  <canvas id="snapChart" width="400" height="400"></canvas>
+  <div id="score-line" class="score-line"></div>
+  <div class="btn-row">
+    <a id="analysis-link" class="primary-btn" href="#">Detailed analysis ↗</a>
   </div>
+</section>
+</main>
+<footer><small>&copy; 2025 Team Fisher Coaching</small></footer>
+<script>if('serviceWorker'in navigator)navigator.serviceWorker.register('sw.js');</script>
 </body>
 </html>

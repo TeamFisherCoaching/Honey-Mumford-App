@@ -1,0 +1,1 @@
+self.addEventListener('install',e=>e.waitUntil(caches.open('hm-v3').then(c=>c.addAll(['./','./index.html','./style.css','./script-quiz.js','./analysis.html','./script-analysis.js','./questions1.json','./logo.jpg']))));self.addEventListener('fetch',e=>e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request))));

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Honey &amp; Mumford Learning‑Styles Questionnaire</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="icon" href="logo.svg">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header><img src="logo.svg" alt="Team Fisher logo" id="logo"></header>
+  <main>
+    <section id="quizCard" class="card">
+      <div id="progress">1 / 80</div>
+      <p id="statement">Loading…</p>
+      <div class="btnRow">
+        <button id="agreeBtn" aria-label="Agree">✓ Agree</button>
+        <button id="disagreeBtn" aria-label="Disagree">✗ Disagree</button>
+      </div>
+    </section>
+
+    <section id="resultCard" class="card" hidden>
+      <h2>Your learning‑style profile</h2>
+      <table id="scoreTable">
+        <thead><tr><th>Style</th><th>Score</th></tr></thead>
+        <tbody>
+          <tr><td>Activist</td><td id="scActivist">0</td></tr>
+          <tr><td>Reflector</td><td id="scReflector">0</td></tr>
+          <tr><td>Theorist</td><td id="scTheorist">0</td></tr>
+          <tr><td>Pragmatist</td><td id="scPragmatist">0</td></tr>
+        </tbody>
+      </table>
+      <canvas id="resultChart" aria-label="Radar chart" role="img"></canvas>
+      <p id="dominantStyle" class="dominant"></p>
+      <button id="retakeBtn">Retake questionnaire</button>
+    </section>
+
+    <section id="noDataCard" class="card" hidden>
+      <p>Please take the questionnaire first.</p>
+      <button id="startBtn">Start questionnaire</button>
+    </section>
+  </main>
+</body>
+</html>

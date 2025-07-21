@@ -1,0 +1,24 @@
+:root{
+  --bg:#05182e;
+  --card:#072549;
+  --accent:#00c2ff;
+  --text:#e6f4ff;
+  --text-dim:#9eb6d1;
+}
+*{box-sizing:border-box;margin:0;padding:0;font-family:system-ui,sans-serif;}
+html,body{height:100%;background:var(--bg);color:var(--text);}
+header{padding:.75rem 1rem;}
+#logo{width:140px;height:auto;}
+main{display:flex;justify-content:center;align-items:flex-start;padding:2rem 1rem 4rem;min-height:calc(100% - 80px);}
+.card{width:100%;max-width:500px;background:var(--card);padding:1.5rem;border-radius:12px;box-shadow:0 6px 18px rgba(0,0,0,.45);}
+#progress{text-align:right;color:var(--text-dim);margin-bottom:1rem;}
+#statement{font-size:1.25rem;line-height:1.4;min-height:120px;display:flex;align-items:center;justify-content:center;text-align:center;margin-bottom:1.75rem;}
+.btnRow{display:flex;gap:1rem;justify-content:center;}
+button{flex:1;padding:.8rem 1rem;border:none;border-radius:8px;font-size:1.1rem;font-weight:600;cursor:pointer;color:#000;background:var(--accent);transition:filter .2s;}
+button:hover{filter:brightness(1.1);}button:active{filter:brightness(.9);}
+#scoreTable{width:100%;margin:1rem 0 2rem;border-collapse:collapse;text-align:left;}
+#scoreTable th,#scoreTable td{padding:.4rem .2rem;}
+#scoreTable tbody tr:nth-child(even){background:rgba(255,255,255,.05);}
+canvas{width:100%!important;min-height:220px;margin-bottom:1.5rem;}
+.dominant{font-size:1.2rem;font-weight:600;text-align:center;margin-bottom:1.75rem;color:var(--accent);}
+body{scrollbar-width:none;}body::-webkit-scrollbar{display:none;}

@@ -1,5 +1,13 @@
+// app.js  – Team Fisher Honey & Mumford LSQ
+// ------------------------------------------------------------
+// 1. 80 statements (original wording)
+// 2. styleMap – which style each statement scores (A / R / T / P)
+// 3. Mobile‑first quiz → radar‑chart results
+// ------------------------------------------------------------
 
-// app.js
+// ——————————————————————————
+// 80 questionnaire statements
+// ——————————————————————————
 const statements = [
   "I have strong beliefs about what is right and wrong, good and bad.",
   "I often act without considering the possible consequences.",
@@ -19,18 +27,18 @@ const statements = [
   "I like to reach a decision carefully after weighing up many alternatives.",
   "I'm attracted more to novel, unusual ideas than to practical ones.",
   "I don't like disorganised things and prefer to fit things into a coherent pattern.",
-  "I accept and stick to laid down procedures and policies so long as I regard them as an efficient way of getting the job done.",
+  "I accept and stick to laid‑down procedures and policies so long as I regard them as an efficient way of getting the job done.",
   "I like to relate my actions to a general principle.",
   "In discussions I like to get straight to the point.",
   "I tend to have distant, rather formal relationships with people at work.",
   "I thrive on the challenge of tackling something new and different.",
-  "I enjoy fun-loving, spontaneous people.",
+  "I enjoy fun‑loving, spontaneous people.",
   "I pay meticulous attention to detail before coming to a conclusion.",
   "I find it difficult to produce ideas on impulse.",
   "I believe in coming to the point immediately.",
   "I am careful not to jump to conclusions too quickly.",
-  "I prefer to have as many sources of information as possible - the more data to mull over the better.",
-  "Flippant people who don't take things seriously enough usually irritate me.",
+  "I prefer to have as many sources of information as possible – the more data to mull over the better.",
+  "Flippant people who don’t take things seriously enough usually irritate me.",
   "I listen to other people's point of view before putting my own forward.",
   "I tend to be open about how I'm feeling.",
   "In discussions I enjoy watching the manoeuvrings of the other participants.",
@@ -62,9 +70,9 @@ const statements = [
   "In discussions I often find I am the realist, keeping people to the point and avoiding wild speculations.",
   "I like to ponder many alternatives before making up my mind.",
   "In discussions with people I often find I am the most dispassionate and objective.",
-  "In discussions I'm more likely to adopt a \"low profile\" than to take the lead and do most of the talking.",
-  "I like to be able to relate current actions to a longer-term bigger picture.",
-  "When things go wrong I am happy to shrug it off and \"put it down to experience\".",
+  "In discussions I'm more likely to adopt a “low profile” than to take the lead and do most of the talking.",
+  "I like to be able to relate current actions to a longer‑term bigger picture.",
+  "When things go wrong I am happy to shrug it off and “put it down to experience”.",
   "I tend to reject wild, spontaneous ideas as being impractical.",
   "It's best to think carefully before taking action.",
   "On balance I do the listening rather than the talking.",
@@ -77,109 +85,48 @@ const statements = [
   "I quickly get bored with methodical, detailed work.",
   "I am keen on exploring the basic assumptions, principles and theories underpinning things and events.",
   "I'm always interested to find out what people think.",
-  "I like meetings to be run on methodical lines, sticking to laid down agenda, etc.",
+  "I like meetings to be run on methodical lines, sticking to laid‑down agenda, etc.",
   "I steer clear of subjective or ambiguous topics.",
   "I enjoy the drama and excitement of a crisis situation.",
   "People often find me insensitive to their feelings."
 ];
-const styleMap   = [
-  "T",
-  "A",
-  "T",
-  "A",
-  "P",
-  "A",
-  "R",
-  "T",
-  "P",
-  "A",
-  "P",
-  "T",
-  "R",
-  "T",
-  "R",
-  "R",
-  "A",
-  "T",
-  "P",
-  "T",
-  "P",
-  "T",
-  "A",
-  "A",
-  "R",
-  "T",
-  "P",
-  "R",
-  "R",
-  "T",
-  "R",
-  "A",
-  "R",
-  "A",
-  "P",
-  "R",
-  "P",
-  "A",
-  "R",
-  "A",
-  "R",
-  "T",
-  "A",
-  "P",
-  "A",
-  "R",
-  "T",
-  "A",
-  "P",
-  "P",
-  "T",
-  "R",
-  "P",
-  "P",
-  "R",
-  "P",
-  "T",
-  "A",
-  "P",
-  "R",
-  "T",
-  "R",
-  "T",
-  "A",
-  "P",
-  "R",
-  "R",
-  "T",
-  "P",
-  "P",
-  "A",
-  "A",
-  "P",
-  "A",
-  "T",
-  "R",
-  "T",
-  "T",
-  "A",
-  "P"
-  "P"
+
+// ——————————————————————————
+// Which statement scores which style?
+// T = Theorist, A = Activist, R = Reflector, P = Pragmatist
+// **Must be exactly 80 entries in the same order as ‘statements’**
+// ——————————————————————————
+const styleMap = [
+  "T","A","T","A","P","A","R","T","P","A",
+  "P","T","R","T","R","R","A","T","P","T",
+  "P","T","A","A","R","T","P","R","R","T",
+  "R","A","R","A","P","R","P","A","R","A",
+  "R","T","A","P","A","R","T","A","P","P",
+  "T","R","P","P","R","P","T","A","P","R",
+  "T","R","T","A","P","R","R","T","P","P",
+  "A","A","P","A","T","R","T","T","A","P"
 ];
 
-const scoresInit = {activist:0,reflector:0,theorist:0,pragmatist:0};
-let qIndex = 0;
-let scores = {...scoresInit};
+// ——————————————————————————
+// Runtime state
+// ——————————————————————————
+const scoresInit = { activist:0, reflector:0, theorist:0, pragmatist:0 };
+let qIndex = 0;                     // 0‑based array index
+let scores = { ...scoresInit };     // running totals
 
+// ——————————————————————————
+// DOM handles
+// ——————————————————————————
 const quizCard   = document.getElementById('quizCard');
 const resultCard = document.getElementById('resultCard');
 const noDataCard = document.getElementById('noDataCard');
-+const introCard  = document.getElementById('introCard');   // NEW
-+const beginBtn   = document.getElementById('beginBtn');
+const introCard  = document.getElementById('introCard');    // intro screen
+const beginBtn   = document.getElementById('beginBtn');     // “Start” button
 
-const progressEL = document.getElementById('progress');
-const statementEL= document.getElementById('statement');
-const agreeBtn   = document.getElementById('agreeBtn');
-const disagreeBtn= document.getElementById('disagreeBtn');
+const progressEL  = document.getElementById('progress');
+const statementEL = document.getElementById('statement');
+const agreeBtn    = document.getElementById('agreeBtn');
+const disagreeBtn = document.getElementById('disagreeBtn');
 
 const scActivist   = document.getElementById('scActivist');
 const scReflector  = document.getElementById('scReflector');
@@ -188,83 +135,158 @@ const scPragmatist = document.getElementById('scPragmatist');
 const dominantEL   = document.getElementById('dominantStyle');
 
 const retakeBtn = document.getElementById('retakeBtn');
-const startBtn  = document.getElementById('startBtn');
+const startBtn  = document.getElementById('startBtn');      // fallback no‑data button
 
+// ——————————————————————————
+//  Startup
+// ——————————————————————————
 (function init(){
   let raw = null;
   try { raw = localStorage.getItem('honeyMumfordScores'); }
-  catch(e){ console.warn('localStorage unavailable', e); }
+  catch (e) { console.warn('localStorage unavailable', e); }
 
-  // Wire the Start button
+  // wire the “Start the questionnaire” button
   beginBtn.onclick = () => showQuestion();
 
+  // returning visitors?
   if (raw) {
     try {
       scores = JSON.parse(raw);
       if (validScores(scores)) {
-        showResults();      // returning visitor → jump to their chart
+        showResults();            // jump straight to their chart
         return;
       }
-    } catch(e) {
+    } catch (e) {
       console.warn('Bad JSON in storage', e);
     }
   }
 
-  // First‑time visitor → stay on the intro card
+  // first‑time visitors stay on the intro screen
   introCard.hidden = false;
 })();
 
-
+// ——————————————————————————
+//  Quiz flow
+// ——————————————————————————
 function showQuestion(){
   introCard.hidden  = true;
-  resultCard.hidden=true;
-  noDataCard.hidden=true;
-  quizCard.hidden=false;
-  if(qIndex>=statements.length){ saveAndShowResults(); return; }
-  progressEL.textContent = `${qIndex+1} / ${statements.length}`;
+  resultCard.hidden = true;
+  noDataCard.hidden = true;
+  quizCard.hidden   = false;
+
+  if (qIndex >= statements.length) { saveAndShowResults(); return; }
+
+  progressEL.textContent  = `${qIndex+1} / ${statements.length}`;
   statementEL.textContent = statements[qIndex];
+
   agreeBtn.onclick    = () => answer(true);
   disagreeBtn.onclick = () => answer(false);
 }
 
-function answer(isAgree){
-  if(isAgree){
+function answer(agree){
+  if (agree){
     const style = styleMap[qIndex];
-    switch(style){ case 'A': scores.activist++; break; case 'R': scores.reflector++; break; case 'T': scores.theorist++; break; case 'P': scores.pragmatist++; break; }
+    switch (style){
+      case 'A': scores.activist++;   break;
+      case 'R': scores.reflector++;  break;
+      case 'T': scores.theorist++;   break;
+      case 'P': scores.pragmatist++; break;
+    }
   }
-  qIndex++; showQuestion();
+  qIndex++;
+  showQuestion();
 }
 
 function saveAndShowResults(){
-  try{ localStorage.setItem('honeyMumfordScores', JSON.stringify(scores)); }catch(e){ console.warn('Save error',e); }
+  try {
+    localStorage.setItem('honeyMumfordScores', JSON.stringify(scores));
+  } catch (e) {
+    console.warn('Could not save scores', e);
+  }
   showResults();
 }
 
-let chart;
+// ——————————————————————————
+//  Results / radar chart
+// ——————————————————————————
+let chart;   // Chart.js instance
+
 function showResults(){
-  quizCard.hidden=true;
-  resultCard.hidden=false;
-  noDataCard.hidden=true;
-  scActivist.textContent=scores.activist;
-  scReflector.textContent=scores.reflector;
-  scTheorist.textContent=scores.theorist;
-  scPragmatist.textContent=scores.pragmatist;
-  const [domStyle,domScore] = Object.entries(scores).reduce((a,b)=>a[1]>=b[1]?a:b);
-  dominantEL.textContent = `Your dominant style is ${domStyle[0].toUpperCase()+domStyle.slice(1)} (${domScore}).`;
-  if(chart) chart.destroy();
-  waitForSize(resultCard, ()=>{
-    const ctx=document.getElementById('resultChart');
-    chart = new Chart(ctx,{
-      type:'radar',
-      data:{ labels:['Activist','Reflector','Theorist','Pragmatist'], datasets:[{ data:[scores.activist,scores.reflector,scores.theorist,scores.pragmatist], fill:true, borderWidth:2 }] },
-      options:{ responsive:true, maintainAspectRatio:false, scales:{ r:{ beginAtZero:true, max:20, ticks:{ stepSize:5 } } }, plugins:{ legend:{ display:false } } }
+  quizCard.hidden   = true;
+  resultCard.hidden = false;
+  noDataCard.hidden = true;
+
+  // numeric table
+  scActivist.textContent   = scores.activist;
+  scReflector.textContent  = scores.reflector;
+  scTheorist.textContent   = scores.theorist;
+  scPragmatist.textContent = scores.pragmatist;
+
+  const [domStyle, domScore] = Object.entries(scores)
+                                     .reduce((a,b)=>a[1]>=b[1]?a:b);
+  dominantEL.textContent = `Your dominant style is ${titleCase(domStyle)} (${domScore}).`;
+
+  // build radar chart when container has real size
+  if (chart) chart.destroy();
+  waitForSize(resultCard, () => {
+    const ctx = document.getElementById('resultChart');
+    chart = new Chart(ctx, {
+      type: 'radar',
+      data: {
+        labels: ['Activist','Reflector','Theorist','Pragmatist'],
+        datasets: [{
+          data: [
+            scores.activist,
+            scores.reflector,
+            scores.theorist,
+            scores.pragmatist
+          ],
+          fill: true,
+          borderWidth: 2
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          r: {
+            beginAtZero: true,
+            max: 20,
+            ticks: { stepSize: 5 }
+          }
+        },
+        plugins: { legend: { display: false } }
+      }
     });
     new ResizeObserver(()=>chart.resize()).observe(resultCard);
   });
 }
 
-function waitForSize(el,cb){ const{width,height}=el.getBoundingClientRect(); if(width&&height) cb(); else requestAnimationFrame(()=>waitForSize(el,cb)); }
-function validScores(o){ return o && ['activist','reflector','theorist','pragmatist'].every(k=>typeof o[k]==='number'); }
+// helper – wait until element has width/height before drawing chart
+function waitForSize(el, cb){
+  const { width, height } = el.getBoundingClientRect();
+  if (width && height) cb();
+  else requestAnimationFrame(() => waitForSize(el, cb));
+}
 
-retakeBtn.onclick=startOver; startBtn.onclick=startOver;
-function startOver(){ localStorage.removeItem('honeyMumfordScores'); scores={...scoresInit}; qIndex=0; showQuestion(); }
+// ——————————————————————————
+//  Misc helpers
+// ——————————————————————————
+function validScores(o){
+  return o && ['activist','reflector','theorist','pragmatist']
+    .every(k => typeof o[k] === 'number');
+}
+function titleCase(s){ return s.charAt(0).toUpperCase() + s.slice(1); }
+
+// ——————————————————————————
+//  Retake / restart
+// ——————————————————————————
+retakeBtn.onclick = startOver;
+startBtn.onclick  = startOver;
+
+function startOver(){
+  localStorage.removeItem('honeyMumfordScores');
+  scores = { ...scoresInit };
+  qIndex = 0;
+  showQuestion();
+}

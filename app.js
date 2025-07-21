@@ -163,6 +163,7 @@ const styleMap   = [
   "T",
   "A",
   "P"
+  "P"
 ];
 
 const scoresInit = {activist:0,reflector:0,theorist:0,pragmatist:0};
@@ -172,6 +173,8 @@ let scores = {...scoresInit};
 const quizCard   = document.getElementById('quizCard');
 const resultCard = document.getElementById('resultCard');
 const noDataCard = document.getElementById('noDataCard');
++const introCard  = document.getElementById('introCard');   // NEW
++const beginBtn   = document.getElementById('beginBtn');
 
 const progressEL = document.getElementById('progress');
 const statementEL= document.getElementById('statement');
@@ -188,13 +191,32 @@ const retakeBtn = document.getElementById('retakeBtn');
 const startBtn  = document.getElementById('startBtn');
 
 (function init(){
-  let raw=null;
-  try{ raw = localStorage.getItem('honeyMumfordScores'); }catch(e){ console.warn('localStorage unavailable',e); }
-  if(raw){ try{ scores=JSON.parse(raw); if(validScores(scores)){ showResults(); return; } }catch(e){ console.warn('Bad JSON',e); } }
-  showQuestion();
+  let raw = null;
+  try { raw = localStorage.getItem('honeyMumfordScores'); }
+  catch(e){ console.warn('localStorage unavailable', e); }
+
+  // Wire the Start button
+  beginBtn.onclick = () => showQuestion();
+
+  if (raw) {
+    try {
+      scores = JSON.parse(raw);
+      if (validScores(scores)) {
+        showResults();      // returning visitor → jump to their chart
+        return;
+      }
+    } catch(e) {
+      console.warn('Bad JSON in storage', e);
+    }
+  }
+
+  // First‑time visitor → stay on the intro card
+  introCard.hidden = false;
 })();
 
+
 function showQuestion(){
+  introCard.hidden  = true;
   resultCard.hidden=true;
   noDataCard.hidden=true;
   quizCard.hidden=false;
